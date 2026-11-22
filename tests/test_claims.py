@@ -44,7 +44,7 @@ def test_detektoren():
     dz = ev.detektor_zusammenfassung(R)
     zeilen = {d: f"{ev.pct(dz[d]['erk_shapley'][0])} / {ev.pct(dz[d]['fehl_echt'][0])}" for d in ("orakel", "gbm", "rf", "linear")}
     assert zeilen == {"orakel": "100,0 % / 0,0 %", "gbm": "98,2 % / 1,1 %", "rf": "99,2 % / 7,5 %", "linear": "49,4 % / 48,7 %"}
-    for text in ("Orakel 100,0 % / 0,0 %", "Boosting 98,2 % / 1,1 %", "Zufallswald 99,2 % / 7,5 %", "49,4 % / 48,7 %"):
+    for text in ("Orakel 100,0 % / 0,0 %", "Boosting 98,2 % / 1,1 %", "Random Forest 99,2 % / 7,5 %", "49,4 % / 48,7 %"):
         im_readme(text)
     # Gegenprobe zur Absolutaussage „lineares Modell nahe am Zufall“: in jedem Zufalls-Seed zwischen 0,4 und 0,6
     assert all(0.4 < s["detektor"]["linear"]["erk_shapley"] < 0.6 for s in ev.seeds(R))
@@ -116,7 +116,7 @@ def test_gedaechtnis():
     assert (zg[("gbm", 1.0)]["geruest"]["rang1_global"], zg[("rf", 1.0)]["geruest"]["rang1_global"]) == (8, 7)
     for text in ("q = 0,74 (Orakel: 0,28)", "**B 0,79 ± 0,04, W 0,89 ± 0,02**", "**B 0,78 ± 0,06, W 0,76 ± 0,03**", "in 4 (B) beziehungsweise 0 (W) von 10 Zufalls-Seeds global auf Rang 1, bei derselben Art in 8 beziehungsweise 7"):
         im_readme(text)
-    # Gegenprobe: das Gedächtnis täuscht bei Hintergrund aus dem Training in allen 12 Zellen (Boosting, Zufallswald x 3 Aufschläge x 2 Hintergrundarten) stärker als das Orakel-Gerüst;
+    # Gegenprobe: das Gedächtnis täuscht bei Hintergrund aus dem Training in allen 12 Zellen (Boosting, Random Forest x 3 Aufschläge x 2 Hintergrundarten) stärker als das Orakel-Gerüst;
     # beim kleinen Netz nicht in allen (bei c = 0,5 ist die Verzerrung unmaskiert kaum sichtbar)
     for b in ("gbm", "rf"):
         for c in C.C_STUFEN:
@@ -148,7 +148,7 @@ def test_netz():
     im_readme("0,23 bei Zufallshintergrund gegen 0,70 bei Hintergrund derselben Art")
     im_readme("nur in 2 von 10 Zufalls-Seeds global auf Rang 1, die Art in 8 von 10")
     im_readme("Bau 2 von 10, mit Gerüst 0 von 10")
-    # Gegenprobe: Boosting und Zufallswald stehen unmaskiert in 10 von 10 Zufalls-Seeds auf Rang 1
+    # Gegenprobe: Boosting und Random Forest stehen unmaskiert in 10 von 10 Zufalls-Seeds auf Rang 1
     assert shp("gbm", 1.0, "training", 0.0, "orakel")["verzerrt"]["rang1_global"] == 10 and shp("rf", 1.0, "training", 0.0, "orakel")["verzerrt"]["rang1_global"] == 10
 
 

@@ -22,7 +22,7 @@ def lade_raster():
 
 @lru_cache(maxsize=1)
 def lade_zweit():
-    """Nachmessung mit anderen Zufalls-Seeds (nur Boosting und Zufallswald, c = 1,0): nicht Teil der App, sondern der README und ihrer Tests."""
+    """Nachmessung mit anderen Zufalls-Seeds (nur Boosting und Random Forest, c = 1,0): nicht Teil der App, sondern der README und ihrer Tests."""
     return json.loads((ROOT / C.ZWEIT_DATEI).read_text(encoding="utf-8"))
 
 

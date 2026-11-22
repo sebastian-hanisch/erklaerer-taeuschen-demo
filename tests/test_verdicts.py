@@ -97,4 +97,4 @@ def test_zahlenformate_dezimalkomma():
 def test_hinweis_treue_erst_unter_95_prozent_und_mit_zahl():
     assert ev.hinweis_treue("orakel", 1.0) == "" and ev.hinweis_treue("gbm", 0.95) == ""
     text = ev.hinweis_treue("rf", 0.925)
-    assert "„Zufallswald“" in text and "92,5 %" in text and "Modellwechsel" in text
+    assert "„Random Forest“" in text and "92,5 %" in text and "Modellwechsel" in text

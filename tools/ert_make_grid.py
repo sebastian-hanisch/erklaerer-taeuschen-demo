@@ -50,7 +50,7 @@ def rechne(seeds, teil, zweit=False):
             print(f"seed {sd}: vorhanden, übersprungen", flush=True)
             continue
         t0 = time.time()
-        # zweiter Satz: nur Boosting und Zufallswald, c = 1, ohne die Reihe zum Wissen des Angreifers
+        # zweiter Satz: nur Boosting und Random Forest, c = 1, ohne die Reihe zum Wissen des Angreifers
         extra = dict(bases=("gbm", "rf"), cs=(1.0,), mit_wissen=False) if zweit else {}
         res = M.messe_seed(sd, log=lambda *a: print(f"[{time.time() - t0:5.0f} s]", *a, flush=True), **extra)
         ziel.write_text(json.dumps(res, ensure_ascii=False), encoding="utf-8")
@@ -66,7 +66,7 @@ def fuege_zusammen(teil, seeds, ziel=None, zweit=False):
                 quelle="tools/ert_make_grid.py (ert_messung.messe_seed), erfundener Verweilzeit-Generator, keine reale Datenquelle")
     ziel = ziel or GRID
     if zweit:
-        meta["bemerkung"] = "Nachmessung mit anderen Zufalls-Seeds (nur Boosting und Zufallswald, c = 1,0, ohne die Reihe zum Wissen des Angreifers); nicht Teil des Rasters der App"
+        meta["bemerkung"] = "Nachmessung mit anderen Zufalls-Seeds (nur Boosting und Random Forest, c = 1,0, ohne die Reihe zum Wissen des Angreifers); nicht Teil des Rasters der App"
     ziel.parent.mkdir(exist_ok=True)
     ziel.write_text(json.dumps({"meta": meta, "seeds": daten}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"{ziel}: {len(daten)} Zufalls-Seeds, {ziel.stat().st_size / 1e6:.2f} MB")

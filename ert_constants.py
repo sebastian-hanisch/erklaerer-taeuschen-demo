@@ -22,7 +22,7 @@ GRUPPE_AB = 6                      # verzerrtes Merkmal: Kundengruppe = (Kunde >
 
 # --- Modellklassen (Hyperparameter fest für dieses Stück) ---------------------------------------------------------------------
 BASEN = ("gbm", "rf", "mlp")
-BASIS_LABEL = {"gbm": "Boosting", "rf": "Zufallswald", "mlp": "kleines Netz"}
+BASIS_LABEL = {"gbm": "Boosting", "rf": "Random Forest", "mlp": "kleines Netz"}
 GBM_RUNDEN, GBM_TIEFE, GBM_LR, GBM_BINS, GBM_MIN_BLATT = 200, 3, 0.1, 64, 5
 RF_BAEUME, RF_MIN_BLATT, RF_MTRY, RF_BINS = 60, 5, 3, 64
 MLP_HIDDEN, MLP_ALPHA, MLP_SCHRITTE, MLP_LR = 16, 3.0, 1500, 0.01
@@ -41,8 +41,8 @@ C_HAUPT = 1.0
 P_STUFEN = (0.0, 0.25, 0.5, 0.75, 1.0)
 WISSEN_STUFEN = (30, 100, 300, 1000, 3000)
 DETEKTOREN = ("orakel", "gbm", "rf", "linear", "gedaechtnis")
-DET_LABEL = {"orakel": "Orakel (Gültigkeitsprüfung)", "gbm": "Boosting", "rf": "Zufallswald", "linear": "lineares Modell", "gedaechtnis": "Gedächtnis (kennt die Trainingszeilen)"}
-DET_LABEL_KURZ = {"orakel": "Orakel", "gbm": "Boosting", "rf": "Zufallswald", "linear": "linear", "gedaechtnis": "Gedächtnis"}
+DET_LABEL = {"orakel": "Orakel (Gültigkeitsprüfung)", "gbm": "Boosting", "rf": "Random Forest", "linear": "lineares Modell", "gedaechtnis": "Gedächtnis (kennt die Trainingszeilen)"}
+DET_LABEL_KURZ = {"orakel": "Orakel", "gbm": "Boosting", "rf": "Random Forest", "linear": "linear", "gedaechtnis": "Gedächtnis"}
 STICHPROBEN = ("std", "koal", "zeile")
 STICHPROBE_LABEL = {"std": "std: jede Spalte unabhängig gezogen", "koal": "koal: Koalitions-Ersatz", "zeile": "zeile: ganze echte Zeilen"}
 QUELLEN = ("training", "frisch")

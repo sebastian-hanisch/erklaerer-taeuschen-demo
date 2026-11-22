@@ -1,4 +1,4 @@
-"""Modellklassen nur mit numpy (kein scikit-learn): Boosting (Histogramm-Bäume), Zufallswald, kleines Netz, logistisches Modell als Detektor.
+"""Modellklassen nur mit numpy (kein scikit-learn): Boosting (Histogramm-Bäume), Random Forest, kleines Netz, logistisches Modell als Detektor.
 
 Hyperparameter sind fest (ert_constants). Zufall kommt aus SplitMix64 (ert_rng). Alle Modelle haben `.fit(X, y)` und `.predict(X)`;
 die Detektoren (`DetektorModell`) liefern `.ood(X)` = „nicht aus den Daten“. Das Boosting ist an verweilzeit-demo/vwz_models.py angelehnt (L2, Histogramm-Bäume),
@@ -165,7 +165,7 @@ class Boosting:
 
 
 class Zufallswald:
-    """Zufallswald: Bootstrap je Baum, je Knoten `mtry` zufällig gewählte Merkmale, Blätter mit mindestens `min_blatt` Zeilen, Mittel über die Bäume."""
+    """Random Forest: Bootstrap je Baum, je Knoten `mtry` zufällig gewählte Merkmale, Blätter mit mindestens `min_blatt` Zeilen, Mittel über die Bäume."""
 
     def __init__(self, seed, baeume=C.RF_BAEUME, min_blatt=C.RF_MIN_BLATT, mtry=C.RF_MTRY, bins=C.RF_BINS):
         self.seed, self.n_baeume, self.min_blatt, self.mtry, self.bins = seed, baeume, min_blatt, mtry, bins
@@ -279,7 +279,7 @@ class Logistisch:
 
 class DetektorModell:
     """Detektor: Klassifikator auf (echte Zeilen = 0, Spaltenmischungen = 1); `ood(X)` ist True, wenn die Zeile als „nicht aus den Daten“ gilt.
-    art: 'gbm' (Boosting mit quadratischem Verlust auf 0/1, Schwelle 0,5), 'rf' (Zufallswald auf 0/1, Schwelle 0,5), 'linear' (logistisch)."""
+    art: 'gbm' (Boosting mit quadratischem Verlust auf 0/1, Schwelle 0,5), 'rf' (Random Forest auf 0/1, Schwelle 0,5), 'linear' (logistisch)."""
 
     def __init__(self, art, Xreal, Xmix, seed, runden=C.DET_GBM_RUNDEN):
         self.art = art
